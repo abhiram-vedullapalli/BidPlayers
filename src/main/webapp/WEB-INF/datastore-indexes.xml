@@ -1,0 +1,11 @@
+<!-- Indices written at Mon, 20 Aug 2018 17:09:00 IST -->
+
+<datastore-indexes autoGenerate="true">
+	
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="Users" ancestor="false" source="auto">
+        <property name="Password" direction="asc"/>
+        <property name="UserName" direction="asc"/>
+    </datastore-index>
+
+</datastore-indexes>

@@ -27,6 +27,22 @@ public class UpdateDeleteController {
 		}
 	}
 
+	@RequestMapping(value = "/changevalues" , method = RequestMethod.POST)
+	public String changeValues(HttpServletRequest request , Model model) {
+		HttpSession session = request.getSession(false);
+		if (session == null) {
+			return "mainpage";
+		} else {
+			String playerName = request.getParameter("playerName");
+			Players player = UpdateDeleteOperations.fetchPlayerDetails(playerName);
+			model.addAttribute("playerName",player.getPlayerName());
+			model.addAttribute("playerAge", player.getPlayerAge());
+			model.addAttribute("playerPrice",player.getPlayerPrice());
+
+			return "changevalues";
+		}	
+	}
+	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String updatePostRequest(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
@@ -38,16 +54,7 @@ public class UpdateDeleteController {
 		}
 	}
 
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public String deleteGetRequest(HttpServletRequest request, @ModelAttribute("user") Users user) {
-		HttpSession session = request.getSession(false);
-		if (session == null) {
-			return "mainpage";
-		} else {
-			return "delete";
-
-		}
-	}
+	
 
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public String deletePostRequest(HttpServletRequest request, @ModelAttribute("user") Users user, Model model) {
@@ -56,7 +63,7 @@ public class UpdateDeleteController {
 			return "mainpage";
 		} else {
 			String pName = request.getParameter("playerName");
-			System.out.println("Delete player name " + pName);
+	        
 			
 			try {
 				String delOpMsg = UpdateDeleteOperations.deletePlayer(pName, session);

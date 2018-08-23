@@ -2,7 +2,6 @@ package bidplayers;
 
 import javax.servlet.http.HttpSession;
 
-import org.junit.runner.FilterFactoryParams;
 
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
@@ -26,15 +25,15 @@ public class UpdateDeleteOperations {
 		Query playerQuery = new Query("Players").setFilter(teamFilter);
 		PreparedQuery pq = ds.prepare(playerQuery);
 		Entity result = pq.asSingleEntity();
-		
+
 		if (result.getProperty("playerName").equals(pName)) {
 			playerPrice = (long) result.getProperty("playerPrice");
-			balance = balance + playerPrice ;
+			balance = balance + playerPrice;
 			NumPlayers = NumPlayers - 1;
 			ds.delete(result.getKey());
 			session.setAttribute("Balance", balance);
 			session.setAttribute("NumPlayers", NumPlayers);
-			Filter userFilter = new FilterPredicate("UserName",FilterOperator.EQUAL,session.getAttribute("UserName"));
+			Filter userFilter = new FilterPredicate("UserName", FilterOperator.EQUAL, session.getAttribute("UserName"));
 			Query userQuery = new Query("Users").setFilter(userFilter);
 			PreparedQuery userpq = ds.prepare(userQuery);
 			Entity update = userpq.asSingleEntity();
@@ -42,10 +41,26 @@ public class UpdateDeleteOperations {
 			update.setProperty("NumPlayers", NumPlayers);
 			ds.put(update);
 			return " " + pName + " Deleted Successfully";
-		}
-		else {
+		} else {
 			return " " + pName + " is not part of our team ";
 		}
 
 	}
+
+	// function for fetching player details for updating
+	public static Players fetchPlayerDetails(String playerName) {
+		String pName = DatabaseOperations.anyCase(playerName);
+		
+		// checking whether player name already exists or not in data store
+		Filter playerFilter = new FilterPredicate("playerName", FilterOperator.EQUAL, pName);
+		Query playerQuery = new Query("Players").setFilter(playerFilter);
+		PreparedQuery playerpq = ds.prepare(playerQuery);
+		Entity player = playerpq.asSingleEntity();
+		String name = (String) player.getProperty("playerName");
+		String age = (String) player.getProperty("playerAge");
+		long price = (long) player.getProperty("playerPrice");
+		Players p = new Players(name, age, price);
+		return p;
+	}
+	
 }

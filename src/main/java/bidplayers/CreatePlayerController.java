@@ -1,6 +1,5 @@
 package bidplayers;
 
-import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,12 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
-import com.google.appengine.api.datastore.Entity;
-import com.google.appengine.api.datastore.PreparedQuery;
-import com.google.appengine.api.datastore.Query;
-import com.google.appengine.api.datastore.Query.Filter;
-import com.google.appengine.api.datastore.Query.FilterOperator;
-import com.google.appengine.api.datastore.Query.FilterPredicate;
 
 
 @Controller
@@ -46,18 +39,12 @@ public class CreatePlayerController {
 			
 			String uName = (String) session.getAttribute("UserName");
 			
-			
 			String playerName = request.getParameter("playerName");
 			String playerAge = request.getParameter("playerAge");
 			
-			boolean playerCreated = DatabaseOperations.createNewPlayer(uName,playerName,playerAge,session);
-			if(playerCreated == true) {
-				model.addAttribute("message", "Player Successfully Created");
-				return "create";
-			}else {
-				model.addAttribute("message", "Insufficient Balance.");
-				return "create";
-			}
+			String playerCreated = DatabaseOperations.createNewPlayer(uName,playerName,playerAge,session);
+			model.addAttribute("message",playerCreated);
+			return "create";
 		
 		}
 		

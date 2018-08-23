@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 
 
@@ -25,7 +24,7 @@ public class MainController {
 	
 	@RequestMapping(value = "/register" , method = RequestMethod.POST)
 	public String login(@ModelAttribute("user") Users user , HttpServletRequest request, Model messageModel) {
-		
+
 		//checking if user name already exist or not
 		boolean checkUserName = UserRegistration.checkUserName(user.getUserName());
 		if(checkUserName == true) {
@@ -66,8 +65,8 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/homepage", method = RequestMethod.GET)
-	public String homepageGetRequest(HttpServletRequest req , HttpSession session , @ModelAttribute("user") Users user) {
-		session = req.getSession(false);
+	public String homepageGetRequest(HttpServletRequest req , @ModelAttribute("user") Users user) {
+		HttpSession session = req.getSession(false);
 		if(session == null) {
 			return "mainpage";
 		}else {

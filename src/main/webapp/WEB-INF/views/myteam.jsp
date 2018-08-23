@@ -15,7 +15,6 @@
 <a href="homepage">Home</a>&nbsp;&nbsp;
 <a href="create" >Create Player</a>&nbsp;&nbsp;
 <a href="update">Update Player</a>&nbsp;&nbsp;
-<a href="delete">Delete Player</a>&nbsp;&nbsp;
 <a href="myteam">My Team</a>&nbsp;&nbsp;
 <a href="listall">Players Directory</a>&nbsp;&nbsp;
 <a href="logout">Log Out</a>&nbsp;&nbsp;
@@ -28,7 +27,7 @@
 <br>
 <c:forEach var="temp" items = "${myteam }">
 	${temp }<br>
-	<form action="/update" method="post">
+	<form action="/changevalues" method="post">
 	<input type="hidden"  value="${temp.playerName }" name="playerName">
 	<input type="submit" value="Update Details of ${temp.playerName }"></form><br>
 	<form action="/delete" method="post">

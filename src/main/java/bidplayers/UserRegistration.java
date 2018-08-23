@@ -17,7 +17,10 @@ public class UserRegistration {
 
 	//function for checking if a user name is already taken or not
 	
-	public static boolean checkUserName(String uName) {
+	public static boolean checkUserName(String userName) {
+		String uName = DatabaseOperations.anyCase(userName);
+		
+
 		Filter userFilter = new FilterPredicate("UserName", FilterOperator.EQUAL, uName);
 		try {
 			Query query = new Query("Users").setFilter(userFilter);
@@ -37,7 +40,11 @@ public class UserRegistration {
 
 	//function for registering user details in database
 	
-	public static void userRegistration(String uName, String pWord, String tName, long balance, long numPlayers,HttpSession session) {
+	public static void userRegistration(String userName, String passWord, String teamName, long balance, long numPlayers,HttpSession session) {
+		String uName = DatabaseOperations.anyCase(userName);
+		String pWord = DatabaseOperations.anyCase(passWord);
+		String tName = DatabaseOperations.anyCase(teamName);
+		
 		Entity userEntity = new Entity("Users", uName);
 		userEntity.setProperty("UserName", uName);
 		userEntity.setProperty("PassWord", pWord);
@@ -57,7 +64,9 @@ public class UserRegistration {
 	}
 	
 	//function for authenticating user
-	public static boolean userLogIn(String uName , String pWord , HttpSession session) {
+	public static boolean userLogIn(String userName , String passWord , HttpSession session) {
+		String uName = DatabaseOperations.anyCase(userName);
+		String pWord = DatabaseOperations.anyCase(passWord);
 		Filter userFilter = new FilterPredicate("UserName", FilterOperator.EQUAL, uName);
 		try {
 			Query query = new Query("Users").setFilter(userFilter);

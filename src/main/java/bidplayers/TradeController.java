@@ -35,7 +35,7 @@ public class TradeController {
 		
 		//method to handle trade method
 		@RequestMapping(value="/trade", method = RequestMethod.GET)
-		public String tradeRequest(HttpServletRequest request , Model model) {
+		public String tradeRequest(HttpServletRequest request , Model model , @ModelAttribute("user") Users user) {
 			HttpSession session = request.getSession(false);
 			if(session == null) {
 				return "mainpage";

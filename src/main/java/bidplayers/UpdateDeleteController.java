@@ -34,6 +34,19 @@ public class UpdateDeleteController {
 		}	
 	}
 	
+	@RequestMapping(value = "/changevalues", method = RequestMethod.GET)
+	public String changeValuesGetRequest(HttpServletRequest request, @ModelAttribute("user") Users user,Model model) {
+		HttpSession session = request.getSession(false);
+		if (session == null) {
+			return "mainpage";
+		} else {
+			LinkedList<Players> tradeList = DatabaseOperations.listAllPlayers(session);
+			model.addAttribute("tradePlayers", tradeList);
+			return "listall";
+
+		}
+	}
+	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String updatePostRequest(HttpServletRequest request , Model model) {
 		HttpSession session = request.getSession(false);
@@ -45,6 +58,19 @@ public class UpdateDeleteController {
 			LinkedList<Players> playersList = DatabaseOperations.listMyTeam(session);
 			model.addAttribute("myteam", playersList);
 			model.addAttribute("updelMessage", updelMessage);
+			return "myteam";
+		}
+	}
+
+	@RequestMapping(value = "/update" , method = RequestMethod.GET)
+	public String updateGetRequest(HttpServletRequest request , Model model , @ModelAttribute("user") Users user) {
+		HttpSession session = request.getSession(false);
+		if(session == null) {
+			return "mainpage";
+		}
+		else {
+			LinkedList<Players> playersList = DatabaseOperations.listMyTeam(session);
+			model.addAttribute("myteam", playersList);
 			return "myteam";
 		}
 	}
@@ -77,5 +103,19 @@ public class UpdateDeleteController {
 
 		}
 	}
+	
+	@RequestMapping(value = "/delete" , method = RequestMethod.GET)
+	public String deleteGetRequest(HttpServletRequest request , Model model , @ModelAttribute("user") Users user) {
+		HttpSession session = request.getSession(false);
+		if(session == null) {
+			return "mainpage";
+		}
+		else {
+			LinkedList<Players> playersList = DatabaseOperations.listMyTeam(session);
+			model.addAttribute("myteam", playersList);
+			return "myteam";
+		}
+	}
+
 
 }

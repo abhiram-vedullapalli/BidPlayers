@@ -33,7 +33,7 @@ public class ListPlayersController {
 	
 	//Controller which handles (prints players of my team)
 	@RequestMapping(value = "/myteam" , method = RequestMethod.GET)
-	public String createGetRequest(HttpServletRequest request , Model model) {
+	public String createGetRequest(HttpServletRequest request , Model model , @ModelAttribute("user") Users user) {
 		HttpSession session = request.getSession(false);
 		if(session == null) {
 			return "mainpage";

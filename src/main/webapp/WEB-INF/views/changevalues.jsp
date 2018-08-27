@@ -3,6 +3,7 @@
 <!DOCTYPE html >
 <html>
 <head>
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Update Details</title>
 </head>
@@ -13,7 +14,6 @@
 <div align="center">
 <a href="homepage">Home</a>&nbsp;&nbsp;
 <a href="create" >Create Player</a>&nbsp;&nbsp;
-<a href="update">Update Player</a>&nbsp;&nbsp;
 <a href="myteam">My Team</a>&nbsp;&nbsp;
 <a href="listall">Players Directory</a>&nbsp;&nbsp;
 <a href="logout">Log Out</a>&nbsp;&nbsp;

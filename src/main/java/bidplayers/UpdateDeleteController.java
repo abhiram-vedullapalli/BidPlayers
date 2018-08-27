@@ -16,16 +16,7 @@ import com.google.appengine.api.datastore.EntityNotFoundException;
 @Controller
 public class UpdateDeleteController {
 
-	@RequestMapping(value = "/update", method = RequestMethod.GET)
-	public String updateGetRequest(HttpServletRequest request, @ModelAttribute("user") Users user) {
-		HttpSession session = request.getSession(false);
-		if (session == null) {
-			return "mainpage";
-		} else {
-			return "update";
-
-		}
-	}
+	
 
 	@RequestMapping(value = "/changevalues" , method = RequestMethod.POST)
 	public String changeValues(HttpServletRequest request , Model model) {

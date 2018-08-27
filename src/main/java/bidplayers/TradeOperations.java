@@ -125,7 +125,7 @@ public class TradeOperations {
 				long profitMade = (long) owner.getProperty("Profit");
 				long currentBalance = (long) owner.getProperty("Balance");
 				long profit = offerPrice - previousPrice ;
-				currentBalance = currentBalance + profit;
+				currentBalance = currentBalance + offerPrice;
 				profitMade = profitMade + profit;
 				sold = sold + 1;
 				owner.setProperty("Sold", sold);

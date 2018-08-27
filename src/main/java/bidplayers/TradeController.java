@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -85,6 +86,51 @@ public class TradeController {
 				LinkedList<Trade> requestsToMe = TradeOperations.requestsForMyPlayers(session);
 				model.addAttribute("requestsToMe", requestsToMe);
 				return "trade";
+			}
+		}
+		
+		@RequestMapping(value = "/reject", method = RequestMethod.GET)
+		public String updateGetRequest(HttpServletRequest request, @ModelAttribute("user") Users user , Model model) {
+			HttpSession session = request.getSession(false);
+			if (session == null) {
+				return "mainpage";
+			} else {
+				LinkedList<Trade> requestsIMade = TradeOperations.requestsIMade(session);
+				model.addAttribute("requestsIMade", requestsIMade);
+				
+				LinkedList<Trade> requestsToMe = TradeOperations.requestsForMyPlayers(session);
+				model.addAttribute("requestsToMe", requestsToMe);
+				return "trade";
+
+			}
+		}
+		
+		@RequestMapping(value = "/accept", method = RequestMethod.GET)
+		public String acceptGetRequest(HttpServletRequest request, @ModelAttribute("user") Users user,Model model) {
+			HttpSession session = request.getSession(false);
+			if (session == null) {
+				return "mainpage";
+			} else {
+				LinkedList<Trade> requestsIMade = TradeOperations.requestsIMade(session);
+				model.addAttribute("requestsIMade", requestsIMade);
+				
+				LinkedList<Trade> requestsToMe = TradeOperations.requestsForMyPlayers(session);
+				model.addAttribute("requestsToMe", requestsToMe);
+				return "trade";
+
+			}
+		}
+		
+		@RequestMapping(value = "/buy", method = RequestMethod.GET)
+		public String buyGetRequest(HttpServletRequest request, @ModelAttribute("user") Users user,Model model) {
+			HttpSession session = request.getSession(false);
+			if (session == null) {
+				return "mainpage";
+			} else {
+				LinkedList<Players> tradeList = DatabaseOperations.listAllPlayers(session);
+				model.addAttribute("tradePlayers", tradeList);
+				return "listall";
+
 			}
 		}
 }

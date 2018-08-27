@@ -40,7 +40,7 @@ public class UserRegistration {
 
 	//function for registering user details in database
 	
-	public static void userRegistration(String userName, String passWord, String teamName, long balance, long numPlayers,HttpSession session) {
+	public static void userRegistration(String userName, String passWord, String teamName, long balance, long numPlayers,long sold,long profit,HttpSession session) {
 		String uName = DatabaseOperations.anyCase(userName);
 		String pWord = DatabaseOperations.anyCase(passWord);
 		String tName = DatabaseOperations.anyCase(teamName);
@@ -51,10 +51,14 @@ public class UserRegistration {
 		userEntity.setProperty("TeamName", tName);
 		userEntity.setProperty("Balance", balance);
 		userEntity.setProperty("NumPlayers", numPlayers);
+		userEntity.setProperty("Sold",sold );
+		userEntity.setProperty("Profit", profit);
 		session.setAttribute("UserName", uName);
 		session.setAttribute("TeamName", tName);
 		session.setAttribute("Balance", balance);
 		session.setAttribute("NumPlayers", numPlayers);
+		session.setAttribute("Sold", sold);
+		session.setAttribute("Profit", profit);
 		ds.put(userEntity);
 	}
 	
@@ -76,10 +80,14 @@ public class UserRegistration {
 				String tName = (String) result.getProperty("TeamName");
 				long balance = (long) result.getProperty("Balance");
 				long numPlayers = (long) result.getProperty("NumPlayers");
+				long sold = (long) result.getProperty("Sold");
+				long profit = (long) result.getProperty("Profit");
 				session.setAttribute("UserName", uName);
 				session.setAttribute("TeamName", tName);
 				session.setAttribute("Balance", balance);
 				session.setAttribute("NumPlayers", numPlayers);
+				session.setAttribute("Sold", sold);
+				session.setAttribute("Profit", profit);
 				return true;
 			} else {
 				return false;

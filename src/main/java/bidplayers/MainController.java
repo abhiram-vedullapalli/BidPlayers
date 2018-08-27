@@ -34,7 +34,7 @@ public class MainController {
 		}else {
 			// registering user
 			HttpSession session = request.getSession();
-			UserRegistration.userRegistration(user.getUserName(), user.getPassWord(), user.getTeamName(),user.getBalance(), user.getNumPlayers(),session);
+			UserRegistration.userRegistration(user.getUserName(), user.getPassWord(), user.getTeamName(),user.getBalance(), user.getNumPlayers(),user.getSold(),user.getProfit(),session);
 			return "homepage";
 		} 
 	}

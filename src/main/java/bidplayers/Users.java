@@ -6,6 +6,8 @@ public class Users {
 	private String teamName;
 	private long balance = 100;
 	private long numPlayers = 0;
+	private long sold = 0;
+	private long profit = 0;
 	private String[] players;
 	
 	public String getUserName() {
@@ -37,5 +39,17 @@ public class Users {
 	}
 	public void setNumPlayers(long numPlayers) {
 		this.numPlayers = numPlayers;
+	}
+	public long getSold() {
+		return sold;
+	}
+	public void setSold(long sold) {
+		this.sold = sold;
+	}
+	public long getProfit() {
+		return profit;
+	}
+	public void setProfit(long profit) {
+		this.profit = profit;
 	}
 }

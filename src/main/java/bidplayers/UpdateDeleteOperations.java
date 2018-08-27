@@ -2,7 +2,6 @@ package bidplayers;
 
 import javax.servlet.http.HttpSession;
 
-
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -50,7 +49,7 @@ public class UpdateDeleteOperations {
 	// function for fetching player details for updating
 	public static Players fetchPlayerDetails(String playerName) {
 		String pName = DatabaseOperations.anyCase(playerName);
-		
+
 		// checking whether player name already exists or not in data store
 		Filter playerFilter = new FilterPredicate("playerName", FilterOperator.EQUAL, pName);
 		Query playerQuery = new Query("Players").setFilter(playerFilter);
@@ -62,5 +61,40 @@ public class UpdateDeleteOperations {
 		Players p = new Players(name, age, price);
 		return p;
 	}
+
+	// function for updating player details
+	public static String updatePlayerDetails(String pName, String pAge, String pPrice) {
+		Filter playerFilter = new FilterPredicate("playerName", FilterOperator.EQUAL, pName);
+		Query playerQuery = new Query("Players").setFilter(playerFilter);
+		PreparedQuery playerpq = ds.prepare(playerQuery);
+		Entity player = playerpq.asSingleEntity();
+		long playerPrice = (long) player.getProperty("playerPrice");
+		long sellingPrice ;
 	
-}
+		if(pPrice.equals("") || pAge.equals("")) {
+			if(pPrice.equals("") && !pAge.equals("")) {
+				return "Selling Price can not be null , Enter right value";
+			}
+			if(pAge.equals("") && !pPrice.equals("")) {
+				return "Age can not be null. He is living on this planet for quite some time";
+			}if(pAge.equals("") && pPrice.equals("")) {
+				return "Why you want to Update, If you can't provide the values ?";
+			}
+		}
+		
+		sellingPrice = Long.parseLong(pPrice);
+		if(sellingPrice < playerPrice) {
+			return "Price is not acceptable to Player";
+		}
+		 else {
+			player.setProperty("playerAge", pAge);
+			player.setProperty("SellingPrice", sellingPrice);
+
+			ds.put(player);
+			
+			return "" + pName + " details successfully updated";
+		}
+
+	}
+	
+	}

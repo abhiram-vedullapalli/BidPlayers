@@ -30,7 +30,8 @@ public class ListPlayersController {
 	
 		}
 	}
-
+	
+	//Controller which handles (prints players of my team)
 	@RequestMapping(value = "/myteam" , method = RequestMethod.GET)
 	public String createGetRequest(HttpServletRequest request , Model model) {
 		HttpSession session = request.getSession(false);
@@ -43,16 +44,21 @@ public class ListPlayersController {
 			return "myteam";
 		}
 	}
+	
+	//Controller to handle Players who are listed on Trade
 	@RequestMapping(value="/listall" , method = RequestMethod.GET)
-	public String listAllGetRequest(HttpServletRequest request ,  @ModelAttribute("user") Users user) {
+	public String listAllGetRequest(HttpServletRequest request ,  @ModelAttribute("user") Users user , Model model) {
 		HttpSession session = request.getSession(false);
 		if(session == null) {
 			return "mainpage";
 		}
 		else {
+			LinkedList<Players> tradeList = DatabaseOperations.listAllPlayers(session);
+			model.addAttribute("tradePlayers", tradeList);
 			return "listall";
 	
 		}
 		}
+	
 	
 }

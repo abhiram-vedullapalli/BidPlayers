@@ -84,9 +84,6 @@ public class DatabaseOperations {
 			return " " + pName + " already exists. Enter New Name";
 
 		}
-		/*if (checkPlayerName.getProperty("playerName").equals(pName)) {
-			return " " + pName + " already exists. Enter New Name";
-		} */
 		
 		
 
@@ -94,10 +91,8 @@ public class DatabaseOperations {
 
 	// method for listing players in a particular team
 	public static LinkedList<Players> listMyTeam(HttpSession session) {
-		int counter = 0;
 		LinkedList<Players> playersList = new LinkedList<>();
 		Filter teamFilter = new FilterPredicate("playerOwner", FilterOperator.EQUAL, session.getAttribute("UserName"));
-		System.out.println("Username in filter predicate " + session.getAttribute("UserName"));
 		Query teamQuery = new Query("Players").setFilter(teamFilter);
 		PreparedQuery pq = ds.prepare(teamQuery);
 		for (Entity players : pq.asIterable()) {
@@ -105,16 +100,32 @@ public class DatabaseOperations {
 			String age = (String) players.getProperty("playerAge");
 			long price = (long) players.getProperty("playerPrice");
 
-			if (name.equals(session.getAttribute("UserName"))) {
-				counter++;
-			}
+			
 			playersList.add(new Players(name, age, price));
 		}
-		System.out.println("No of iterations " + counter);
-		System.out.println("Players list after full creation " + playersList);
+		
 		return playersList;
 	}
 	
+	// method for listing players for trade in Players directory
+	
+	public static LinkedList<Players> listAllPlayers(HttpSession session) {
+		LinkedList<Players> tradeList = new LinkedList<>();
+		Filter teamFilter = new FilterPredicate("playerOwner", FilterOperator.NOT_EQUAL, session.getAttribute("UserName"));
+		Query teamQuery = new Query("Players").setFilter(teamFilter);
+		PreparedQuery pq = ds.prepare(teamQuery);
+		for(Entity tradePlayers : pq.asIterable()) {
+			if(!(tradePlayers.getProperty("SellingPrice") == null)) {
+				String name = (String) tradePlayers.getProperty("playerName");
+				String age = (String) tradePlayers.getProperty("playerAge");
+				long price = (long) tradePlayers.getProperty("SellingPrice");
+				String team = (String) tradePlayers.getProperty("playerTeam");
+				String owner = (String) tradePlayers.getProperty("playerOwner");
+				tradeList.add(new Players(name, age, price,team,owner));
+			}
+		}
+		return tradeList;
+	}
 	//case conversion method for handling name cases
 	public static String anyCase(String s) {
 		char[] c = s.toCharArray();

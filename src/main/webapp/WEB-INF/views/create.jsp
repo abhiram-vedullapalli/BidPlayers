@@ -15,7 +15,8 @@
 <a href="create" >Create Player</a>&nbsp;&nbsp;
 <a href="update">Update Player</a>&nbsp;&nbsp;
 <a href="myteam">My Team</a>&nbsp;&nbsp;
-<a href="listall">Players Directory</a>&nbsp;&nbsp;
+<a href="trade">Trade Details</a>&nbsp;&nbsp;
+<a href="listall">Players On Sale</a>&nbsp;&nbsp;
 <a href="logout">Log Out</a>&nbsp;&nbsp;
 <br>
 </div>

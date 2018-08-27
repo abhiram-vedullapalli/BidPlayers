@@ -44,12 +44,16 @@ public class UpdateDeleteController {
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String updatePostRequest(HttpServletRequest request) {
+	public String updatePostRequest(HttpServletRequest request , Model model) {
 		HttpSession session = request.getSession(false);
 		if (session == null) {
 			return "mainpage";
 		} else {
-
+			
+			String updelMessage = UpdateDeleteOperations.updatePlayerDetails(request.getParameter("playerName"),request.getParameter("playerAge"), request.getParameter("playerPrice"));
+			LinkedList<Players> playersList = DatabaseOperations.listMyTeam(session);
+			model.addAttribute("myteam", playersList);
+			model.addAttribute("updelMessage", updelMessage);
 			return "myteam";
 		}
 	}
@@ -66,12 +70,12 @@ public class UpdateDeleteController {
 	        
 			
 			try {
-				String delOpMsg = UpdateDeleteOperations.deletePlayer(pName, session);
-				System.out.println(delOpMsg);
+				String updelMessage = UpdateDeleteOperations.deletePlayer(pName, session);
+			
 
 				LinkedList<Players> playersList = DatabaseOperations.listMyTeam(session);
 				model.addAttribute("myteam", playersList);
-				model.addAttribute("delOpMsg", delOpMsg);
+				model.addAttribute("updelMessage", updelMessage);
 				return "myteam";
 			} catch (EntityNotFoundException e) {
 				LinkedList<Players> playersList = DatabaseOperations.listMyTeam(session);

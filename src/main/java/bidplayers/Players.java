@@ -4,11 +4,11 @@ public class Players {
  private String playerName ;
  private String playerAge;
  private String playerTeam;
- private Users playerOwner;
+ private String playerOwner;
  private long playerPrice;
  
  
-public Players(String playerName, String playerAge, String playerTeam, Users playerOwner, long playerPrice) {
+public Players(String playerName, String playerAge, long playerPrice, String playerTeam, String playerOwner) {
 	this.playerName = playerName;
 	this.playerAge = playerAge;
 	this.playerTeam = playerTeam;
@@ -38,10 +38,10 @@ public String getPlayerTeam() {
 public void setPlayerTeam(String playerTeam) {
 	this.playerTeam = playerTeam;
 }
-public Users getPlayerOwner() {
+public String getPlayerOwner() {
 	return playerOwner;
 }
-public void setPlayerOwner(Users playerOwner) {
+public void setPlayerOwner(String playerOwner) {
 	this.playerOwner = playerOwner;
 }
 public long getPlayerPrice() {
@@ -50,13 +50,24 @@ public long getPlayerPrice() {
 public void setPlayerPrice(long playerPrice) {
 	this.playerPrice = playerPrice;
 }
+
+//for printing in MY TEAM
 @Override
 public String toString() {
+	
 	return "Name of Player : " + playerName + "<br>"
 			+ "Age : " + playerAge + "<br>"
 			+ "Price : " + playerPrice + " crores <br>"	
 			;
 }
 
-
+//for printing in players directory
+public String allDetails() {
+	return "Name : " + playerName + "<br>"
+			+ "Age : " + playerAge + "<br>"
+			+ "Asking Price : " + playerPrice + " crores <br>"	
+			+ "Current Team : " + playerTeam + "<br>"
+			+ "Current Owner : " + playerOwner + "<br>"
+			;
+}
 }

@@ -9,7 +9,7 @@
 <title>Trade Details</title>
 </head>
 <body>
-	<h1 align="center">${TeamName }</h1>
+	<h1 align="center">${Team}</h1>
 	<br>
 	<div align="center">
 		<a href="homepage">Home</a>&nbsp;&nbsp; <a href="create">Create

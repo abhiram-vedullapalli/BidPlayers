@@ -33,11 +33,27 @@
 	</dependencyManagement>
 
 	<dependencies>
+	
+	<!-- https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-mapper-asl -->
+<dependency>
+    <groupId>org.codehaus.jackson</groupId>
+    <artifactId>jackson-mapper-asl</artifactId>
+    <version>1.9.13</version>
+</dependency>
+	
 		<!-- Spring MVC Dependencies -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>5.0.8.RELEASE</version>
+		</dependency>
+
+		<!-- Google cloud Storage dependency -->
+		
+		<dependency>
+    		<groupId>com.google.appengine.tools</groupId>
+    		<artifactId>appengine-gcs-client</artifactId>
+    		<version>0.7</version>
 		</dependency>
 
 		<!-- Compile/runtime dependencies -->

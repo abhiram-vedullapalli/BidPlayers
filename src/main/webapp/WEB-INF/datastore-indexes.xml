@@ -1,11 +1,23 @@
-<!-- Indices written at Mon, 20 Aug 2018 17:09:00 IST -->
+<!-- Indices written at Fri, 21 Sep 2018 14:11:52 IST -->
 
 <datastore-indexes autoGenerate="true">
-	
-    <!-- Used 1 time in query history -->
-    <datastore-index kind="Users" ancestor="false" source="auto">
-        <property name="Password" direction="asc"/>
-        <property name="UserName" direction="asc"/>
+
+    <!-- Used 4 times in query history -->
+    <datastore-index kind="Players" ancestor="false" source="auto">
+        <property name="playerOwner" direction="asc"/>
+        <property name="SellingPrice" direction="asc"/>
+        <property name="playerAge" direction="asc"/>
+        <property name="playerImage" direction="asc"/>
+        <property name="playerName" direction="asc"/>
+        <property name="playerTeam" direction="asc"/>
     </datastore-index>
 
+<!-- Used 3 times in query history -->
+    <datastore-index kind="Players" ancestor="false" source="auto">
+        <property name="playerOwner" direction="asc"/>
+        <property name="playerPrice" direction="asc"/>
+        <property name="playerAge" direction="asc"/>
+        <property name="playerImage" direction="asc"/>
+        <property name="playerName" direction="asc"/>
+    </datastore-index>
 </datastore-indexes>

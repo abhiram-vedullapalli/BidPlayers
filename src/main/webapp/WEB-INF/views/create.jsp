@@ -1,5 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
+<%@ page import="com.google.appengine.api.blobstore.BlobstoreServiceFactory" %>
+<%@ page import="com.google.appengine.api.blobstore.BlobstoreService" %>
+
+<%
+
+BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+
+%>
+
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,9 +32,11 @@
 <br>
 </div>
 <br>
-<form action="create" method="post">
+<form action="<%= blobstoreService.createUploadUrl("/create") %>" method="post" enctype="multipart/form-data">
 Enter Name of Player : <input type="text" required="required" name="playerName"><br><br>
 Enter Age of Player : <input type="number" name="playerAge"  min="16" max="40" required="required"><br><br>
+Upload Picture of Player : <input type="file" name="myFile" required="required"><br><br>
+
 <input type="submit" value="Create">
 </form>
 <p style="color: green;">${message }</p>

@@ -11,7 +11,7 @@
 		http://www.springframework.org/schema/mvc
 		http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 		
-		<context:component-scan base-package="bidplayers"></context:component-scan>
+		<context:component-scan base-package="create.player,list.player,registration,trade.player,updatedelete.player"></context:component-scan>
 		
 		<mvc:annotation-driven />
 		

@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
+<%-- <%@ page import="com.google.appengine.api.blobstore.BlobstoreServiceFactory" %>
+<%@ page import="com.google.appengine.api.blobstore.BlobstoreService" %>
+
+<%
+BlobstoreService blobstoreService = BlobstoreServiceFactory.getBlobstoreService();
+String blobKey = (String)request.getParameter("blob-key");
+%> 
+ --%>     
 <!DOCTYPE html >
 <html>
 <head>
@@ -18,12 +27,13 @@
 <a href="listall">Players On Sale</a>&nbsp;&nbsp;
 <a href="logout">Log Out</a>&nbsp;&nbsp;
 <br>
-<h3>Team Name : ${TeamName } </h3>
-<h3>Team Director : ${UserName }</h3>
-<h3>Money in Purse : ${Balance } crores</h3>
-<h3>No.of Players Bought : ${NumPlayers }</h3>
-<h3>No.of Players Sold   : ${Sold }</h3>
-<h3>Profit Made out of Trade : ${Profit } crores</h3>
+<h3>Team Name : ${User.teamName } </h3>
+<h3>Team Director : ${User.userName }</h3>
+<h3>Money in Purse : ${User.balance } crores</h3>
+<h3>No.of Players Bought : ${User.numPlayers }</h3>
+<h3>No.of Players Sold   : ${User.sold }</h3>
+<h3>Profit Made out of Trade : ${User.profit } crores</h3>
+<img height="200" width="200" alt="${User.teamName }" src="${User.image }">
 </div>
 </body>
 </html>
